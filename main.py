@@ -1,4 +1,4 @@
-from controller import VoteController
+from voting import VoteController
 
 if __name__ == "__main__":
     controller = VoteController()

@@ -41,7 +41,7 @@ class VoteController:
             return
 
         # Record vote
-        self.model.vote(candidate)
+        self.model.vote(voter_id, first_name, last_name, candidate)
         self.gui.label_select_candidate.setText(self.model.get_results())
 
         QMessageBox.information(self.gui, "Vote Recorded", f"Voted for {candidate} successfully!")
