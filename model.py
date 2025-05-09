@@ -1,21 +1,18 @@
 import csv
 import os
 
-
 class VoteModel:
     """
     Handles vote tallying and records votes to a CSV file.
     """
+    def __init__(self) -> None:
+        self.votes: dict[str, int] = {"John": 0, "Jane": 0}
+        self.filename: str = "votes.csv"
 
-    def __init__(self):
-        self.votes = {"John": 0, "Jane": 0}
-        self.filename = "votes.csv"
-
-        # Initialize CSV file if it doesn’t exist
         if not os.path.exists(self.filename):
             self.create_csv()
 
-    def create_csv(self):
+    def create_csv(self) -> None:
         """
         Creates the CSV file with headers.
         """
@@ -23,7 +20,7 @@ class VoteModel:
             writer = csv.writer(file)
             writer.writerow(["Voter ID", "First Name", "Last Name", "Candidate"])
 
-    def vote(self, voter_id, first_name, last_name, candidate):
+    def vote(self, voter_id: str, first_name: str, last_name: str, candidate: str) -> None:
         """
         Adds a vote, records it to CSV, and updates tally.
         """
@@ -34,7 +31,7 @@ class VoteModel:
 
         self.record_vote(voter_id, first_name, last_name, candidate)
 
-    def record_vote(self, voter_id, first_name, last_name, candidate):
+    def record_vote(self, voter_id: str, first_name: str, last_name: str, candidate: str) -> None:
         """
         Saves vote information into the CSV file.
         """
@@ -42,9 +39,9 @@ class VoteModel:
             writer = csv.writer(file)
             writer.writerow([voter_id, first_name, last_name, candidate])
 
-    def get_results(self):
+    def get_results(self) -> str:
         """
         Returns formatted vote results.
         """
-        total_votes = sum(self.votes.values())
+        total_votes: int = sum(self.votes.values())
         return f"John - {self.votes['John']}, Jane - {self.votes['Jane']}, Total - {total_votes}"
